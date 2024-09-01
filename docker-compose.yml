@@ -1,0 +1,19 @@
+version: "3.7"
+
+networks:
+    proxy:
+        external: true
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        container_name: php.${APP_NAME}
+        ports:
+            - "80:8000"
+        restart: unless-stopped
+        volumes:
+            - .:/var/www
+        networks:
+            - proxy
