@@ -17,3 +17,26 @@ services:
             - .:/var/www
         networks:
             - proxy
+
+#    mariadb:
+#        container_name: mariadb
+#        image: mariadb:10
+#        restart: unless-stopped
+#        ports:
+#            - "3306:3306"
+#        environment:
+#            MYSQL_ROOT_PASSWORD: "Psswd#123"
+#            MYSQL_ROOT_HOST: "%"
+#            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+#        volumes:
+#            - mariadb:/var/lib/mysql
+#        networks:
+#            - proxy
+#        ulimits:
+#            nproc: 65535
+#            nofile:
+#                soft: 26677
+#                hard: 46677
+#
+#volumes:
+#  mariadb:
