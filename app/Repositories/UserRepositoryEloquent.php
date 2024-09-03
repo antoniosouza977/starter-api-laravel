@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Entities\User;
+use App\Repositories\Interfaces\UserRepository;
 use App\Validators\UserValidator;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Events\RepositoryEntityCreated;
 use Prettus\Repository\Events\RepositoryEntityCreating;
 use Prettus\Repository\Events\RepositoryEntityUpdated;
@@ -14,7 +14,7 @@ use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class UserRepositoryEloquent extends BaseRepository
+class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
     public function model(): string
     {
@@ -38,7 +38,7 @@ class UserRepositoryEloquent extends BaseRepository
 
         event(new RepositoryEntityCreated($this, $model));
 
-        return $this->parserResult($model);
+        return $model;
     }
 
     /**

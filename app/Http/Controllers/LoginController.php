@@ -42,7 +42,7 @@ class LoginController extends Controller
 
         $token = $user->createToken($request->device_name, ['*'], now()->addDay())->plainTextToken;
 
-        return response()->json([
+        return new JsonResponse([
             'token' => $token,
             'expiresIn' => now()->addDay()->toDateTimeString(),
         ]);
