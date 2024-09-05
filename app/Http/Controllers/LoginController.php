@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepositoryEloquent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -28,14 +28,14 @@ class LoginController extends Controller
             'device_name' => 'required',
         ]);
 
-        $user = $this->repository->findByField('username', $request['username'])->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+        if (!Auth::attempt($request->only(['username', 'password']))) {
+            return response()->json([
+                'message' => 'Invalid username or password',
+            ], 401);
         }
 
+        $user = $this->repository->findByField('username', $request['username'])->first();
         $user->tokens()
             ->where('name', $request->device_name)
             ->delete();
@@ -44,7 +44,7 @@ class LoginController extends Controller
 
         return new JsonResponse([
             'token' => $token,
-            'expiresIn' => now()->addDay()->toDateTimeString(),
+            'expiration' => now()->addDay()->timestamp,
         ]);
     }
 }
