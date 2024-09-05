@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Entities\Role;
+use App\Models\Role;
 use App\Repositories\Interfaces\RoleRepository;
 use App\Validators\RoleValidator;
 use Prettus\Repository\Criteria\RequestCriteria;

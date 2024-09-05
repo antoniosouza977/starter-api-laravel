@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\appends;
 
-use App\Entities\RestrictedRoute;
+use App\Models\RestrictedRoute;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Entities\RestrictedRoute;
+use App\Models\RestrictedRoute;
 use App\Repositories\Interfaces\RouteRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
